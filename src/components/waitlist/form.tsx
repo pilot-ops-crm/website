@@ -14,7 +14,7 @@ type InputForm = {
     idle: string;
     loading: string;
   };
-} & React.HTMLAttributes<HTMLInputElement>;
+};
 
 type State = "idle" | "loading" | "success" | "error";
 
@@ -25,7 +25,7 @@ const STATES: Record<State, State> = {
   error: "error",
 };
 
-export function InputForm({ formAction, buttonCopy, ...props }: InputForm) {
+export function InputForm({ formAction, buttonCopy }: InputForm) {
   const [state, setState] = useState<State>(STATES.idle);
   const [error, setError] = useState<string>();
   const [emailValue, setEmailValue] = useState("");
@@ -107,7 +107,6 @@ export function InputForm({ formAction, buttonCopy, ...props }: InputForm) {
         />
         <input
           name="email"
-          {...props}
           value={emailValue}
           className={clsx(
             "w-full text-sm px-4 py-2 h-11 bg-background cursor-text rounded-full text-foreground placeholder:text-muted-foreground border border-border"

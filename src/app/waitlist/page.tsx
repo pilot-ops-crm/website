@@ -3,7 +3,7 @@
 import { InputForm } from "@/components/waitlist/form";
 import { WaitlistWrapper } from "@/components/waitlist/box";
 import React, { useState } from "react";
-import { addToWaitlist } from "@/actions/waitlist";
+import { submitWaitlistAction } from "@/actions/waitlist";
 import { Alex_Brush } from "next/font/google";
 import clsx from "clsx";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -24,18 +24,7 @@ export default function WaitlistPage() {
     loading: "Joining...",
   };
 
-  const formAction = async (data: FormData) => {
-    const email = String(data.get("email") || "").trim();
-    const name = String(data.get("name") || "").trim();
-
-    const result = await addToWaitlist(email, name);
-    return result.success
-      ? { success: true as const }
-      : {
-          success: false as const,
-          error: result.error || "Failed to add to waitlist",
-        };
-  };
+  const formAction = submitWaitlistAction;
 
   return (
     <div className="max-w-screen-sm mx-auto w-full flex flex-col min-h-screen">
