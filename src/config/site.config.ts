@@ -23,7 +23,8 @@ export const siteConfig: SiteConfig = {
     url: "https://arjuncodess.is-a.dev/",
   },
   socials: {
-    github: "https://github.com/pilot-ops-crm/app",
+    github: "https://github.com/pilot-ops-crm",
     x: "https://x.com/PilotOps_",
+    instagram: "https://instagram.com/pilot.ops/"
   },
 };
