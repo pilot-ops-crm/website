@@ -72,7 +72,12 @@ export function WaitlistWrapper({
             size="sm"
             className="text-xs w-full md:w-auto justify-center flex"
           >
-            <Link href="https://pilot-ops-app.vercel.app">
+            <Link
+              href="https://pilot-ops-app.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open the Pilot app in new tab"
+            >
               open the app
               <ArrowUpRight />
             </Link>
