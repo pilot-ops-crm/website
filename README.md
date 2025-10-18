@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://pilot-ops.vercel.app" rel="noopener">
- <img width=600px height=315px src="https://pilot-ops.vercel.app/og.png" alt="Pilot - Marketing & Waitlist Site"></a>
+ <img width=750px height=394px src="https://pilot-ops.vercel.app/og.png" alt="Pilot - Marketing & Waitlist Site"></a>
 </p>
 
 <h3 align="center">Pilot - Marketing & Waitlist Website</h3>
