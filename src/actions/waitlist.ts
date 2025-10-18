@@ -2,8 +2,13 @@
 
 import axios from "axios";
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const API_BASE_URL = "https://pilot-ops-app.vercel.app";
 const API_TOKEN = process.env.WAITLIST_API_TOKEN;
+
+if (!API_TOKEN) {
+  throw new Error("WAITLIST_API_TOKEN environment variable is not configured");
+}
 
 /**
  * Add a user to the waitlist via the API endpoint
@@ -17,8 +22,7 @@ export async function addToWaitlist(
   name: string
 ): Promise<{ success: true } | { success: false; error: string }> {
   try {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (!EMAIL_REGEX.test(email)) {
       return { success: false, error: "Please enter a valid email" };
     }
 
@@ -26,15 +30,19 @@ export async function addToWaitlist(
       return { success: false, error: "Please enter your name" };
     }
 
-    const response = await axios.post(`${API_BASE_URL}/api/waitlist`, {
-      email: email.trim().toLowerCase(),
-      name: name.trim(),
-      token: API_TOKEN,
-    }, {
-      headers: {
-        "Content-Type": "application/json",
+    const response = await axios.post(
+      `${API_BASE_URL}/api/waitlist`,
+      {
+        email: email.trim().toLowerCase(),
+        name: name.trim(),
+        token: API_TOKEN,
       },
-    });
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     const data = response.data;
 
@@ -48,12 +56,15 @@ export async function addToWaitlist(
     }
   } catch (error) {
     console.error("Error in addToWaitlist action:", error);
-    
+
     if (axios.isAxiosError(error)) {
-      const errorMessage = error.response?.data?.error || error.message || "Failed to add to waitlist";
+      const errorMessage =
+        error.response?.data?.error ||
+        error.message ||
+        "Failed to add to waitlist";
       return { success: false, error: errorMessage };
     }
-    
+
     return { success: false, error: "Failed to add to waitlist" };
   }
 }
@@ -85,8 +96,7 @@ export async function submitWaitlistForm(
  * Validate email format (client-side validation helper)
  */
 export async function validateEmail(email: string): Promise<boolean> {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
+  return EMAIL_REGEX.test(email);
 }
 
 /**
