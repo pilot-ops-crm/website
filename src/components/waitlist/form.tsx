@@ -30,24 +30,33 @@ export function InputForm({ formAction, buttonCopy }: InputForm) {
   const [error, setError] = useState<string>();
   const [emailValue, setEmailValue] = useState("");
   const [nameValue, setNameValue] = useState("");
-  const errorTimeout = useRef<NodeJS.Timeout | null>(null);
+  const errorTimeout = useRef<number | null>(null);
 
   useEffect(() => {
     if (state === STATES.success) {
-      const resetTimeout = setTimeout(() => {
+      const resetTimeout = window.setTimeout(() => {
         setState(STATES.idle);
       }, 2000);
 
-      return () => clearTimeout(resetTimeout);
+      return () => window.clearTimeout(resetTimeout);
     }
   }, [state]);
+
+  useEffect(() => {
+    return () => {
+      if (errorTimeout.current !== null) {
+        window.clearTimeout(errorTimeout.current);
+        errorTimeout.current = null;
+      }
+    };
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formEl = e.currentTarget;
     if (state === STATES.success || state === STATES.loading) return;
     if (errorTimeout.current) {
-      clearTimeout(errorTimeout.current);
+      window.clearTimeout(errorTimeout.current);
       setError(undefined);
       setState(STATES.idle);
     }
@@ -65,7 +74,7 @@ export function InputForm({ formAction, buttonCopy }: InputForm) {
         } else {
           setState(STATES.error);
           setError(data.error);
-          errorTimeout.current = setTimeout(() => {
+          errorTimeout.current = window.setTimeout(() => {
             setError(undefined);
             setState(STATES.idle);
           }, 3000);
@@ -74,7 +83,7 @@ export function InputForm({ formAction, buttonCopy }: InputForm) {
         setState(STATES.error);
         setError("There was an error while submitting the form");
         console.error(error);
-        errorTimeout.current = setTimeout(() => {
+        errorTimeout.current = window.setTimeout(() => {
           setError(undefined);
           setState(STATES.idle);
         }, 3000);

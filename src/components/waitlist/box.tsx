@@ -72,7 +72,7 @@ export function WaitlistWrapper({
             size="sm"
             className="text-xs w-full md:w-auto justify-center flex"
           >
-            <Link href="/sidekick">
+            <Link href="https://pilot-ops-app.vercel.app">
               open the app
               <ArrowUpRight />
             </Link>
