@@ -112,12 +112,12 @@ export default function WaitlistPage() {
                       founders spend hours replying to dms, chasing leads, and
                       trying to stay organized. most tools that claim to help
                       either overcomplicate things or hide everything behind
-                      paywalls and “pro” plans.
+                      paywalls and "pro" plans.
                     </p>
                     <p>so we built pilot.</p>
                     <p>
                       it helps you turn instagram interactions into something
-                      you can actually manage. someone replies “yes” to your
+                      you can actually manage. someone replies "yes" to your
                       reel, and pilot takes care of the rest — saving contacts,
                       sending follow-ups, tracking deals. it&apos;s meant to
                       feel like a quiet helper that works the way you do.
@@ -134,7 +134,7 @@ export default function WaitlistPage() {
                       how it&apos;s built.
                     </p>
                     <p>
-                      there&apos;s no hidden roadmap or “trust us” marketing.
+                      there&apos;s no hidden roadmap or "trust us" marketing.
                       what we&apos;re building is what you see. we still tell
                       our story and share what we&apos;re proud of, but
                       it&apos;s always grounded in reality.
