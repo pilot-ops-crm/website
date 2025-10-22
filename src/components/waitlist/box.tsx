@@ -4,8 +4,9 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import { Icons } from "../icons";
 import { ArrowUpRight } from "lucide-react";
+import { Suspense } from "react";
 
-export function WaitlistWrapper({
+function WaitlistWrapperContent({
   children,
   className,
 }: PropsWithChildren & { className?: string }) {
@@ -85,5 +86,33 @@ export function WaitlistWrapper({
         </div>
       </footer>
     </div>
+  );
+}
+
+function WaitlistWrapperFallback({ className }: { className?: string }) {
+  return (
+    <div
+      className={clsx(
+        "w-full mx-auto max-w-[500px] flex flex-col justify-center items-center bg-white/70 dark:bg-neutral-900/70 pb-0 overflow-hidden rounded-2xl border border-neutral-200/50 dark:border-neutral-800/80",
+        className
+      )}
+    >
+      <div className="flex items-center gap-2 p-6">
+        <Icons.Loader className="text-neutral-500 dark:text-neutral-400" />
+      </div>
+    </div>
+  );
+}
+
+export function WaitlistWrapper({
+  children,
+  className,
+}: PropsWithChildren & { className?: string }) {
+  return (
+    <Suspense fallback={<WaitlistWrapperFallback className={className} />}>
+      <WaitlistWrapperContent className={className}>
+        {children}
+      </WaitlistWrapperContent>
+    </Suspense>
   );
 }

@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { Loader as LoaderIcon } from "lucide-react";
 
 export const Icons = {
   Logo: function Logo({
@@ -64,4 +65,19 @@ export const Icons = {
       />
     </svg>
   ),
+  Loader: function Loader({
+    className,
+    ...props
+  }: {
+    className?: string;
+  } & React.ComponentProps<"svg">) {
+    return (
+      <LoaderIcon
+        role="status"
+        aria-label="Loading"
+        className={cn("size-4 animate-spin", className)}
+        {...props}
+      />
+    );
+  },
 };
